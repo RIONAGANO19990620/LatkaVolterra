@@ -17,7 +17,7 @@ class PhysicsInformedNN:
         with strategy.scope():
             t = Input(shape=(1,))
             z = Dense(1, activation="tanh")(t)
-            for _ in range(48):
+            for _ in range(8):
                 z = Dense(20, activation='tanh')(z)
             z = Dense(2, activation="tanh")(z)
 

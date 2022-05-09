@@ -8,3 +8,7 @@ def main():
     nn = PhysicsInformedNN(t_array, u_noisy, v_noisy)
     nn.train(10000)
     nn.compare_numerical_ans()
+
+
+if __name__ == '__main__':
+    main()
