@@ -9,7 +9,7 @@ def main():
     u = (u - u.min())/(u.max() - u.min())
     t_array = DataFactory.t
     nn = PhysicsInformedNN(t_array, u_noisy, v_noisy)
-    nn.train(10000)
+    nn.train(30000)
     nn.compare_numerical_ans(u, v)
 
 
