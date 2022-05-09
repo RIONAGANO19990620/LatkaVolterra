@@ -40,14 +40,13 @@ class PhysicsInformedNN:
         plt.close()
         plt.clf()
 
-    def compare_numerical_ans(self):
+    def compare_numerical_ans(self, u, v):
         predict = self.model.predict(self.normalized_data_list.t_normalized.data)
         u_predict = predict[:, 0]
         v_predict = predict[:, 1]
-        plt.plot(self.normalized_data_list.u_normalized.array, linestyle='--', label='numerical calculation',
-                 color='red')
+        plt.plot(u, linestyle='--', label='numerical calculation', color='red')
         plt.plot(u_predict, linestyle='-.', label='neural network', color='blue')
-        plt.plot(self.normalized_data_list.v_normalized.array, linestyle='--', color='red')
+        plt.plot(v, linestyle='--', color='red')
         plt.plot(v_predict, linestyle='-.', color='blue')
         plt.legend()
         plt.savefig('compare.png')
