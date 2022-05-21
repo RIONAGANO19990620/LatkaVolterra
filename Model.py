@@ -11,10 +11,10 @@ class PPINs(keras.Model):
 
     def __init__(self, normalized_data_list: NormalizedDataList, *args, **kwargs):
         super(PPINs, self).__init__(*args, **kwargs)
-        self.a = tf.Variable([1], dtype=tf.float32)
-        self.b = tf.Variable([1], dtype=tf.float32)
-        self.c = tf.Variable([1], dtype=tf.float32)
-        self.d = tf.Variable([1], dtype=tf.float32)
+        self.a = tf.Variable([0.5], dtype=tf.float32)
+        self.b = tf.Variable([0.5], dtype=tf.float32)
+        self.c = tf.Variable([0.5], dtype=tf.float32)
+        self.d = tf.Variable([0.5], dtype=tf.float32)
         self.normalized_data_list = normalized_data_list
 
     def train_step(self, data):
