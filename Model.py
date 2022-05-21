@@ -40,12 +40,7 @@ class PPINs(keras.Model):
         v = y_pred[:, 1]
         u_t = tf.gradients(u, x)
         v_t = tf.gradients(v, x)
-        u_m = normalized_data_list.u_normalized.max - normalized_data_list.u_normalized.min
-        v_m = normalized_data_list.v_normalized.max - normalized_data_list.v_normalized.min
         t_m = normalized_data_list.t_normalized.max - normalized_data_list.t_normalized.min
-        u = tf.add(tf.multiply(u, u_m),
-                   normalized_data_list.u_normalized.min)
-        v = tf.add(tf.multiply(v, v_m),
-                   normalized_data_list.v_normalized.min)
-        u_t = tf.divide(tf.multiply(u_t, u_m), t_m)
+        u_t = tf.divide(u_t, t_m)
+        v_t = tf.divide(v_t, t_m)
         return v_t - c * u * v + d * v + u_t - a * u + b * u * v

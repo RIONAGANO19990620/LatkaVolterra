@@ -19,14 +19,14 @@ class PhysicsInformedNN:
             z = Dense(1, activation="tanh")(t)
             for _ in range(8):
                 z = Dense(20, activation='tanh')(z)
-            z = Dense(2, activation="tanh")(z)
+            z = Dense(2, activation="linear")(z)
 
             self.model = PPINs(self.normalized_data_list, t, z)
             self.model.compile(optimizer="adam", metrics=['loss', 'mae', 'a', 'b'])
 
     def train(self, epochs=100):
-        u_data = self.normalized_data_list.u_normalized.data
-        v_data = self.normalized_data_list.v_normalized.data
+        u_data = self.normalized_data_list.u_normalized.array
+        v_data = self.normalized_data_list.v_normalized.array
         self.history = self.model.fit(self.normalized_data_list.t_normalized.data,
                                       y={"u_data": u_data, "v_data": v_data}, epochs=epochs)
 
