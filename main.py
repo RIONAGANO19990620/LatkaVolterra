@@ -9,6 +9,7 @@ def main():
     nn = PhysicsInformedNN(t_array, u_noisy, v_noisy)
     nn.train(1000)
     nn.compare_numerical_ans(u, v)
+    nn.plot_coefficient()
 
 
 if __name__ == '__main__':
