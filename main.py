@@ -7,7 +7,7 @@ def main():
     v, u = DataFactory.get_lotka_volterra()
     t_array = DataFactory.t
     nn = PhysicsInformedNN(t_array, u_noisy, v_noisy)
-    nn.train(30000)
+    nn.train(10000)
     nn.compare_numerical_ans(u, v)
 
 
