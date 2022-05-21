@@ -1,6 +1,7 @@
 import tensorflow as tf
 from matplotlib import pyplot as plt
 from tensorflow.keras.layers import Dense, Input
+from tensorflow.python.keras.callbacks import ReduceLROnPlateau
 
 from Model import PPINs
 from NormalizedData import NormalizedDataList
@@ -24,11 +25,20 @@ class PhysicsInformedNN:
             self.model = PPINs(self.normalized_data_list, t, z)
             self.model.compile(optimizer="adam", metrics=['loss', 'mae', 'a', 'b'])
 
+    def __reduce_lr(self) -> ReduceLROnPlateau:
+        return ReduceLROnPlateau(
+            monitor='loss',
+            factor=0.5,
+            patience=10,
+            min_lr=0.0001
+        )
+
     def train(self, epochs=100):
         u_data = self.normalized_data_list.u_normalized.array
         v_data = self.normalized_data_list.v_normalized.array
         self.history = self.model.fit(self.normalized_data_list.t_normalized.data,
-                                      y={"u_data": u_data, "v_data": v_data}, epochs=epochs)
+                                      y={"u_data": u_data, "v_data": v_data}, epochs=epochs,
+                                      callbacks=[self.__reduce_lr()])
 
     def plot_coefficient(self):
         plt.plot(self.history.history['a'], label='a')
