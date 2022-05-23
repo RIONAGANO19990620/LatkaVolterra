@@ -9,8 +9,8 @@ class DataFactory:
     t = np.arange(0, T, h)
 
     a = 0.8
-    b = 0.3
-    c = 0.6
+    b = 0.35
+    c = 0.65
     d = 1.0
 
     # 方程式を定める関数、初期値の定義
